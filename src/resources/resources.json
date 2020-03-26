@@ -1,0 +1,33 @@
+{
+    "app_title": "React Experiments",
+    "about_me": "A Passionate Technologist ",
+    "name": "Samriddha Chatterjee",
+    "sub_title": "Architect|Full Stack Developer|Mobile App Developer, Kolkata, West Bengal, India",
+    "about_me_text": "<p>I am a focused and motivated individual who enjoys the challenge of using technology to solve problems. My roles on projects ranges from requirement analysis, high level and low level designing, development and training junior developers. </p>",
+    "location":"Location",
+    "linkedin_url":"https://www.linkedin.com/in/samriddhachatterjee/",
+    "github_url": "https://github.com/samriddhac",
+    "skill_label": "Skills",
+    "exp": "Experience",
+    "skills_exps": [
+        {"Java": "12 Years"},
+        {"Spring Framework": "12 Years"}, 
+        {"Spring Boot": "6 Years"}, 
+        {"Microservice Architecture": "6 Years"}, 
+        {"Apache Consul": "3 Years"},
+        {"Hystrix": "3 Years"}, 
+        {"Netflix Zuul": "3 Years"}, 
+        {"Netflix Eureka": "3 Years"}, 
+        {"Spring Cloud Config Server": "3 Years"},
+        {"Zookeeper": "3 Years"}, 
+        {"Redis": "3 Years"}, 
+        {"Node JS": "8 Years"}, 
+        {"IBM Loopback": "2 Years"}, 
+        {"AWS Lambda": "2 Years"}, 
+        {"Serverless Technologies": "2 Years"},
+        {"React/Redux": "8 Years"}, 
+        {"Angular JS": "4 Years"}, 
+        {"LESS/SASS": "6 Years"}
+    ]
+    
+}

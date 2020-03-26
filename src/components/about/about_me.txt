@@ -1,0 +1,7 @@
+<p>I am a focused and motivated individual who enjoys the challenge of using technology to solve problems. My roles on projects ranges from requirement analysis, high level and low level designing, development, training of junior developers. I have been working as a computer professional for the past 12 &nbsp;years.&nbsp;</p>
+<p>
+  <br>
+</p>
+<p>I have also developed mobile apps as hobby. Following is my latest creation :-</p>
+<p>https://play.google.com/store/apps/details?id=com.locationtrackerandroid&amp;hl=en</p>
+<p>(Developed using React Native, Node Js , Redis on AWS platform).</p>
