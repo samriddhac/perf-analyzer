@@ -82,11 +82,17 @@
     border: 1px solid #8f96a3;
 }
 
+.skill:hover {
+    color: #000000;
+    background-color: #8f96a3;
+}
+
 .exp-location {
     margin: 20px 0px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap-reverse;
 }
 
 div.exp-location div > div {

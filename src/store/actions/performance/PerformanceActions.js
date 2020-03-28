@@ -7,6 +7,13 @@ export const captureLoadStats = (data) => {
     }
 }
 
+export const captureRFAFrameRateStats = (data) => {
+    return {
+        type: constants.PERF_CAPTURE_RFA_FRAME_RATE_STATS,
+        payload: data
+    }
+}
+
 export const captureFrameRateStats = (data) => {
     return {
         type: constants.PERF_CAPTURE_FRAME_RATE_STATS,

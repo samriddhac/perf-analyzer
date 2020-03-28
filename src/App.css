@@ -2,6 +2,8 @@ html, body {
   height: 100vh;
   min-height: 100vh;
   margin: 0px;
+  background-color: #ebebe0;
+  font-family: 'Roboto', sans-serif;
 }
 
 #root {
@@ -36,13 +38,13 @@ html, body {
   flex-grow: 1;
   flex-shrink: 1;
   flex-basis: 0%;
+  margin-bottom: 40px;
 }
 
 .layout-1 {
   display: flex;
   background-color: #ffffff;
   min-height: 90vh;
-  overflow-x: hidden;
 }
 /* Smartphones (portrait and landscape) ---------- */
 @media screen and (min-width: 320px) and (max-width: 480px){
@@ -85,4 +87,12 @@ html, body {
   position: absolute;
   top: 120px;
   right: 30px;
+}
+.performance-btn a {
+  text-decoration: none;
+  color: #ffffff;
+}
+.performance-btn a:hover {
+  text-decoration: none;
+  color: #ffffff;
 }

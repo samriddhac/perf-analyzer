@@ -28,6 +28,14 @@
         {"React/Redux": "8 Years"}, 
         {"Angular JS": "4 Years"}, 
         {"LESS/SASS": "6 Years"}
-    ]
+    ],
+    "performance": {
+        "header": "UI Diagnostics",
+        "rfaFrameRate": "Frame Rate (Measured via Request Animation Frame)",
+        "perfFrameRate": "Frame Rate (Measured via Perfomance Web API)",
+        "load_metrics": "Page Load Statistics",
+        "network": "Network Activity Statistics",
+        "render": "DOM Event Statistics"
+    }
     
 }

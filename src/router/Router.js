@@ -5,7 +5,8 @@ import {
   Route
 } from "react-router-dom";
 
-import About from '../components/about/About';
+import AboutView from '../views/AboutView';
+import PerformanceView from '../views/PerformanceView';
 
 export default () => {
 
@@ -18,8 +19,11 @@ export default () => {
                 <Route path='/3d' exact>
 
                 </Route>
+                <Route path='/performance' exact>
+                    <PerformanceView />
+                </Route>
                 <Route path='/' exact>
-                    <About />
+                    <AboutView />
                 </Route>
             </Switch>
         </Router>
