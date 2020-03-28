@@ -46,9 +46,9 @@ export default () => {
         setTimeout(() => {
             useNavigationObserver(dispatch);
         }, 0);
-        usePerformanceObserver();
+        usePerformanceObserver(dispatch);
         requestAnimationFrame(measure);
-    }, []);
+    }, [window.location.pathname]);
 
     if (!location.pathname.includes('/performance')) {
         return (

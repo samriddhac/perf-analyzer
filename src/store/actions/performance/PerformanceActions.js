@@ -20,3 +20,17 @@ export const captureFrameRateStats = (data) => {
         payload: data
     }
 }
+
+export const capturePaintStats = (data) => {
+    return {
+        type: constants.PERF_CAPTURE_PAINTS_STATS,
+        payload: data
+    }
+}
+
+export const captureUserStats = (data) => {
+    return {
+        type: constants.PERF_CAPTURE_USER_STATS,
+        payload: data
+    }
+}

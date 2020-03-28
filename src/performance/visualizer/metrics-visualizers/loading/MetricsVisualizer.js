@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { HorizontalBar, Doughnut } from 'react-chartjs-2';
 import * as resources from '../../../../resources/resources.json';
 
 export default (props) => {
+    const [state, setState] = useState({
+        id:'',
+        sequences:[]
+    });
+
+    useEffect(() => {
+        if(props)
+            setState(props);
+    }, [props]);
 
     const getLabel = (key) => {
         switch (key) {
@@ -15,37 +24,37 @@ export default (props) => {
 
     return (
         <div className='load-metric-container'>
-            <span>{getLabel(props.id)}</span>
+            <span>{getLabel(state.id)}</span>
             <div className='load-metric'>
                 <div className='metric-table'>
-                    {props.sequences.map(seq => {
+                    {state.sequences.map(seq => {
                         return (<div className='metric'>
                             <label>{seq.label}</label>
                             <label>{seq.measure}ms</label>
                         </div>)
                     })}
                     <Doughnut data={{
-                        labels: props.sequences.map(item => item.label.substring(0, (item.label.indexOf('(') - 1))),
+                        labels: state.sequences.map(item => item.label.substring(0, (item.label.indexOf('(') - 1))),
                         datasets: [{
-                            data: props.sequences.map(item => item.measure),
-                            backgroundColor: props.sequences.map(item => item.color),
-                            hoverBackgroundColor: props.sequences.map(item => item.color)
+                            data: state.sequences.map(item => item.measure),
+                            backgroundColor: state.sequences.map(item => item.color),
+                            hoverBackgroundColor: state.sequences.map(item => item.color)
                         }]
                     }} />
                 </div>
                 <div className='metric-graph'>
                     <HorizontalBar
                         data={{
-                            labels: props.sequences.map(item => item.label.substring(0, (item.label.indexOf('(') - 1))),
+                            labels: state.sequences.map(item => item.label.substring(0, (item.label.indexOf('(') - 1))),
                             datasets: [
                                 {
-                                    label: getLabel(props.id),
+                                    label: getLabel(state.id),
                                     backgroundColor: 'rgba(255,99,132,0.2)',
                                     borderColor: 'rgba(255,99,132,1)',
                                     borderWidth: 1,
                                     hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                                     hoverBorderColor: 'rgba(255,99,132,1)',
-                                    data: props.sequences.map(item => item.measure)
+                                    data: state.sequences.map(item => item.measure)
                                 }
                             ]
                         }}

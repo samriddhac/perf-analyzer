@@ -2,6 +2,7 @@ import React from 'react';
 
 import './About.css';
 import Header from '../common/header/Header';
+import withPerformance from '../../performance/PerfHOC';
 import SkillBlock from './SkillsBlock';
 import Location from './Location';
 import * as resources from '../../resources/resources';
@@ -9,7 +10,7 @@ import me from './me.jpg';
 import linkedin from './linkedin.png';
 import github from './github.png';
 
-export default () => {
+export default withPerformance(() => {
     
     return (
         <div className='layout'>
@@ -72,4 +73,4 @@ export default () => {
             </div>
         </div>
     )
-}
+})

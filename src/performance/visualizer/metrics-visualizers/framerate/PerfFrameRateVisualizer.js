@@ -7,14 +7,16 @@ export default () => {
 
     const [xLabels, setXlabels] = useState([]);
     const [data, setData] = useState([]);
-    const rfaFrameRate = useSelector(state => state.diagonostics.framerateStats.rfaFrameRate);
+    const frameRate = useSelector(state => state.diagonostics.framerateStats.frameRate)||[];
     
     useEffect(() => {
-        setXlabels(rfaFrameRate.map((item, index) => { return item.second }));
-        setData(rfaFrameRate.map((item, index) => { 
-            return item.frameCount
-        }));
-    }, [rfaFrameRate]);
+        if(frameRate && frameRate.length > 0) {
+            setXlabels(frameRate.map((item, index) => { return item.second }));
+            setData(frameRate.map((item, index) => { 
+                return item.frameCount
+            }));
+        }
+    }, [frameRate]);
 
     return (
         <div className='graph-container'>

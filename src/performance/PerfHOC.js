@@ -5,11 +5,33 @@ const withPerformance = WrappedComponent => {
     class WithPerformanceComponent extends React.Component {
 
         componentWillMount() {
-            console.log('I am about to render!', WrappedComponent.name);
+            if (performance.measure === undefined) {
+                console.log("Create Measures: performance.measure Not supported", 1);
+                return;
+            }
+            performance.mark(`${WrappedComponent.name}-componentWillMount`);
         }
 
         componentDidMount() {
-            console.log('React Component ', WrappedComponent.name)
+            if (performance.measure === undefined) {
+                console.log("Create Measures: performance.measure Not supported", 1);
+                return;
+            }
+            performance.mark(`${WrappedComponent.name}-componentDidMount`);
+            performance.measure(`perf_${WrappedComponent.name}-load`, 
+                `${WrappedComponent.name}-componentWillMount`, 
+                `${WrappedComponent.name}-componentDidMount`);
+        }
+
+        componentDidUpdate() {
+            if (performance.measure === undefined) {
+                console.log("Create Measures: performance.measure Not supported", 1);
+                return;
+            }
+            performance.mark(`${WrappedComponent.name}-componentDidUpdate`);
+            performance.measure(`perf_${WrappedComponent.name}-load`, 
+                `${WrappedComponent.name}-componentWillMount`, 
+                `${WrappedComponent.name}-componentDidUpdate`);
         }
 
         render() {

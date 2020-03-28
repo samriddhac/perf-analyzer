@@ -1,20 +1,25 @@
 import React from 'react';
-import { captureLoadStats } from '../../store/actions/AppActions';
+import { captureLoadStats, capturePaintStats, captureUserStats } from '../../store/actions/AppActions';
 
 export const usePerformanceObserver = (dispatch) => {
     if (window.PerformanceObserver === undefined) return;
     const process = (type, data) => {
         switch (type) {
+            case "paint":
+                dispatch(capturePaintStats(data));
+                break;
             case "frame":
                 break;
             case "mark":
                 break;
             case "measure":
+                if(data.name.includes('perf_')) {
+                    dispatch(captureUserStats(data));
+                }
                 break;
             case "resource":
                 break;
             default:
-                console.log("Unexpected performance entry type: " + type);
                 break;
         }
     }
@@ -26,7 +31,7 @@ export const usePerformanceObserver = (dispatch) => {
         }
     });
     // Observe frame, mark, measure and resource events
-    observe_all.observe({ entryTypes: ['frame', 'mark', 'measure', 'resource'] });
+    observe_all.observe({ entryTypes: ['paint', 'frame', 'mark', 'measure', 'resource'] });
 }
 
 
@@ -110,8 +115,8 @@ export const useNavigationObserver = (dispatch) => {
             ]
         },
         total: {
-            label: "Total (loadEventEnd - redirectStart)",
-            measure: (perfObj.loadEventEnd - perfObj.redirectStart)
+            label: "Total (loadEventEnd - navigationStart)",
+            measure: (perfObj.loadEventEnd - perfObj.navigationStart)
         },
         raw: perfObj
     }));

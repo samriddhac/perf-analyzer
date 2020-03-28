@@ -5,6 +5,7 @@ import './PerformanceVisualizer.css';
 import * as resources from '../../resources/resources.json';
 import LoadVisualizer from './metrics-visualizers/loading/LoadVisualizer';
 import FrameRateVisualizer from './metrics-visualizers/framerate/FrameRateVisualizer';
+import MeasuresVisualizer from './metrics-visualizers/measures/MeasuresVisualizer';
 
 export default () => {
     const [activeTab, setActiveTab] = useState('1');
@@ -19,6 +20,8 @@ export default () => {
                 return <LoadVisualizer />;
             case '2':
                 return <FrameRateVisualizer />;
+            case '4':
+                return <MeasuresVisualizer />;
             default:
                 return <LoadVisualizer />;
         }
@@ -64,5 +67,9 @@ const tabpanels = [
     {
         index: '2',
         label: 'FrameRate Stats'
+    },
+    {
+        index: '4',
+        label: 'User Stats'
     }
 ];
