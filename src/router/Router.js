@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import AboutView from '../views/AboutView';
+import D3ExperimentsView1 from '../views/D3ExperimentsView1';
 import PerformanceView from '../views/PerformanceView';
 
 export default () => {
@@ -18,6 +19,9 @@ export default () => {
                 </Route>
                 <Route path='/3d' exact>
 
+                </Route>
+                <Route path='/d3-experiment-1' exact>
+                    <D3ExperimentsView1 />
                 </Route>
                 <Route path='/performance' exact>
                     <PerformanceView />

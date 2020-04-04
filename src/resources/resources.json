@@ -41,6 +41,9 @@
         "measure_type": "Measure Type",
         "start_time": "Start Time",
         "duration": "Duration"
+    },
+    "d3": {
+        "d3_experiments": "D3 Js Experiments"
     }
     
 }

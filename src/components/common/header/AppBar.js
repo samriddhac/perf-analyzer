@@ -36,8 +36,9 @@ export default (props) => {
                                             {
                                                 link.subItems.map(subLink => {
                                                     return (
-                                                        <DropdownItem key={subLink.id}>
-                                                            <Link to={subLink.link}>{subLink.title}</Link>
+                                                        <DropdownItem key={subLink.id}
+                                                            className='app-nav-item'>
+                                                            <Link className='app-nav-link' to={subLink.link}>{subLink.title}</Link>
                                                         </DropdownItem>
                                                     )
                                                 })
@@ -50,9 +51,9 @@ export default (props) => {
                                 return (
                                     <NavItem key={link.id}>
                                         <NavLink tag={Link}
-                                            activeClassName='active' 
-                                            href={link.link}>
-                                            {link.title}
+                                            className='app-nav-item'
+                                            activeClassName='active'>
+                                                <Link to={link.link}>{link.title}</Link>
                                         </NavLink>
                                     </NavItem>
                                 );

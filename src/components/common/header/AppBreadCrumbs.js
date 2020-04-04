@@ -24,11 +24,14 @@ const pathList = (pathName, menus) => {
             break;
         }
         else {
-            for(let subMenu of menu.subItems) {
-                if(subMenu.link === pathName) {
-                    child = subMenu.title;
-                    break;
-                } 
+            if(menu.subItems) {
+                for(let subMenu of menu.subItems) {
+                    if(subMenu.link === pathName) {
+                        parent = menu.title;
+                        child = subMenu.title;
+                        break;
+                    } 
+                }
             }
         }
     }

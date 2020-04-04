@@ -36,6 +36,28 @@
     font-weight: 400;
 }
 
+.header .app-nav-item a {
+    color: rgba(255,255,255,.5) !important;
+    text-decoration: none;
+}
+
+.header .app-nav-item a:hover {
+    color:#ffffff !important;
+    text-decoration: none;
+    opacity: 0.8;
+}
+.header a.app-nav-link  {
+    color: #ffffff !important;
+}
+
+.header a.app-nav-link:hover  {
+    color: #ffffff !important;
+}
+
+.navbar-nav .dropdown-menu, .navbar-nav .dropdown-menu button {
+    background-color: #151b26;
+}
+
 .header span {
     margin: 0px 40px 0px 20px;
     color: #ffffff;

@@ -39,18 +39,21 @@ const withPerformance = WrappedComponent => {
                 performance.measure(`perf-${WrappedComponent.name}-commit.componentWillMount`, 
                 `${WrappedComponent.name}.componentWillMount`, 
                 `${WrappedComponent.name}.commit`);
+                console.log('Processed component '+ WrappedComponent.name);
             }
             if(performance.getEntriesByName(`${WrappedComponent.name}.componentDidMount`, 
                 'mark').length > 0) {
                 performance.measure(`perf-${WrappedComponent.name}-commit.componentDidMount`, 
                 `${WrappedComponent.name}.componentDidMount`, 
                 `${WrappedComponent.name}.commit`);
+                console.log('Processed component '+ WrappedComponent.name);
             }
             if(performance.getEntriesByName(`${WrappedComponent.name}.componentDidUpdate`, 
                 'mark').length > 0) {
                 performance.measure(`perf-${WrappedComponent.name}-commit.componentDidUpdate`, 
                 `${WrappedComponent.name}.componentDidUpdate`, 
                 `${WrappedComponent.name}.commit`);
+                console.log('Processed component '+ WrappedComponent.name);
             }
         }
 

@@ -15,7 +15,6 @@ export const usePerformanceObserver = (dispatch) => {
             case "mark":
                 break;
             case "measure":
-                console.log(data);
                 if(data.name.includes('perf-')) {
                     dispatch(captureUserStats(toJS(data)));
                 }
