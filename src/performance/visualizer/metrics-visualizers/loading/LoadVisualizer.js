@@ -13,7 +13,7 @@ export default () => {
                 <div className='paint-stats'>
                 {paintstats.map(paint => {
                     return (
-                        <label>
+                        <label key={paint.name}>
                             {paint.name} : {paint.duration}ms
                         </label>
                     )

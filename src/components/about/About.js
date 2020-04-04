@@ -10,11 +10,11 @@ import me from './me.jpg';
 import linkedin from './linkedin.png';
 import github from './github.png';
 
-export default withPerformance(() => {
+const About = (props) => {
     
     return (
         <div className='layout'>
-            <Header />
+            <Header {...props} />
             <div className='layout-1'>
                 <div className='about-container'>
                     <h1>{resources.about_me}</h1>
@@ -73,4 +73,5 @@ export default withPerformance(() => {
             </div>
         </div>
     )
-})
+}
+export default withPerformance(About);

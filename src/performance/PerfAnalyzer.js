@@ -17,9 +17,11 @@ export default () => {
     let time = null;
 
     window.onload = () => {
-        setInterval(() => {
-            captureFrameRate();
-        }, 1000);
+        if(window.location.pathname !=='/performance') {
+            setInterval(() => {
+                captureFrameRate();
+            }, 1000);
+        }
     }
 
     const captureFrameRate = () => {
@@ -29,7 +31,7 @@ export default () => {
             second: time.toLocaleString().slice(12),
             frameCount: currentFrameRate
         });
-        if (frameRate.length > 60) {
+        if (frameRate.length > 30) {
             frameRate.shift();
         }
         dispatch(captureRFAFrameRateStats(frameRate));
@@ -43,11 +45,14 @@ export default () => {
 
     useEffect(() => {
         time = new Date();
-        setTimeout(() => {
-            useNavigationObserver(dispatch);
-        }, 0);
-        usePerformanceObserver(dispatch);
-        requestAnimationFrame(measure);
+        console.log(window.location.pathname)
+        if(window.location.pathname !=='/performance') {
+            setTimeout(() => {
+                useNavigationObserver(dispatch);
+            }, 1000);
+            usePerformanceObserver(dispatch);
+            requestAnimationFrame(measure);
+        }
     }, [window.location.pathname]);
 
     if (!location.pathname.includes('/performance')) {

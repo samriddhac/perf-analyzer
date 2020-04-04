@@ -3,7 +3,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'typeface-roboto';
 import PerfAnalyzer from './performance/PerfAnalyzer';
-import withPerformance from './performance/PerfHOC';
 
 import Router from './router/Router';
 
@@ -16,4 +15,4 @@ function App() {
   );
 }
 
-export default withPerformance(App);
+export default App;

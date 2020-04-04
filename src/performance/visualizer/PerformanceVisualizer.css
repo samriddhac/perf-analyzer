@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    background-color: #ffffff;
 }
 
 .perf-container span {
@@ -23,6 +24,7 @@
     position: relative;
     height: 36vh;
     width: 100vw;
+    margin-bottom: 36px;
 }
 .graph-container span {
     display: flex;

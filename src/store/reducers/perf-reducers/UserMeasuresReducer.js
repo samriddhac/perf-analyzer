@@ -7,7 +7,8 @@ const INITIAL_STATE ={
 export default (state=INITIAL_STATE, action) => {
     switch(action.type) {
         case constants.PERF_CAPTURE_USER_STATS:
-            return { stats:[...state.stats, action.payload]};
+            let newState = { stats:[action.payload, ...state.stats]};
+            return { ...newState };
         default:
             return state;
     }

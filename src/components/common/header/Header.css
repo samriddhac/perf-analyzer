@@ -44,3 +44,37 @@
 .active {
     color: #ffffff;
 }
+
+.app-breadcrumb {
+    display: flex;
+    background-color: #ffffff;
+    font-size: 0.8rem;
+    color: #8f96a3;
+}
+.app-breadcrumb .breadcrumb {
+    background-color: #ffffff;
+    padding: 0.25rem 1rem;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+/* Smartphones (portrait and landscape) ---------- */
+@media screen and (min-width: 320px) and (max-width: 480px) {
+    .app-breadcrumb {
+        width: 100vw;
+        margin: 0;
+    }
+}
+/* Tablets, iPads (portrait and landscape) ---------- */
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .app-breadcrumb {
+        width: 770px;
+        margin: 0px auto;
+    }
+}
+/* Desktops and laptops ---------- */
+@media screen and (min-width: 1224px){
+    .app-breadcrumb {
+        width: 990px;
+        margin: 0px auto;
+    }
+}

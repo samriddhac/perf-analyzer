@@ -1,20 +1,23 @@
 import React from 'react';
-import { captureLoadStats, capturePaintStats, captureUserStats } from '../../store/actions/AppActions';
+import { captureLoadStats, capturePaintStats, 
+    captureUserStats } from '../../store/actions/AppActions';
+import { toJS } from '../../store/utils/common'; 
 
 export const usePerformanceObserver = (dispatch) => {
     if (window.PerformanceObserver === undefined) return;
     const process = (type, data) => {
         switch (type) {
             case "paint":
-                dispatch(capturePaintStats(data));
+                dispatch(capturePaintStats(toJS(data)));
                 break;
             case "frame":
                 break;
             case "mark":
                 break;
             case "measure":
-                if(data.name.includes('perf_')) {
-                    dispatch(captureUserStats(data));
+                console.log(data);
+                if(data.name.includes('perf-')) {
+                    dispatch(captureUserStats(toJS(data)));
                 }
                 break;
             case "resource":
@@ -118,6 +121,6 @@ export const useNavigationObserver = (dispatch) => {
             label: "Total (loadEventEnd - navigationStart)",
             measure: (perfObj.loadEventEnd - perfObj.navigationStart)
         },
-        raw: perfObj
+        raw: toJS(perfObj)
     }));
 }
