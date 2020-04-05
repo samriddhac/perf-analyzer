@@ -52,7 +52,7 @@ const menuItems = [
         subItems: [
             {
                 id: "14666ff3-c9e7-4f31-9ba5-004132f0de45",
-                title: "D3 Experiments 1",
+                title: "COVID-19 Data Analysis",
                 link: "/d3-experiment-1"
             },
             {

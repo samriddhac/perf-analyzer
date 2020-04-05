@@ -1,0 +1,11 @@
+#chartarea {
+    margin-left: 20px;
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "grad", serif;
+    color: blue;
+}
