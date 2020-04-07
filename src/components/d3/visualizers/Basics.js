@@ -205,7 +205,7 @@ export default () => {
                 .attr('class', 'enter')
                 .attr('fill', (d) => {
                     console.log(continentColor(d.death))
-                    return 'red'
+                    return '#F5A9A9';
                 })
                 .transition(t)
                     .attr('cx', (d) => {
