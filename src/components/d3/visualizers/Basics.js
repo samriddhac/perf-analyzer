@@ -153,11 +153,11 @@ export default () => {
             .attr("transform", "rotate(-90)")
             .text('COVID-19 Death Count');
 
-        const xAxisGroup = group.append('g')
+        const xAxisScatterGroup = group.append('g')
             .attr('class', 'x axis')
             .attr("transform", "translate(0," + height +")");
 
-        const yAxisGroup = group.append('g')
+        const yAxisScatterGroup = group.append('g')
             .attr('class', 'y axis');
 
         // X Scale
@@ -187,11 +187,11 @@ export default () => {
             y.domain([d3.max(data, (d) => d.death), 0]);
 
             const xAxis = d3.axisBottom(x);
-            xAxisGroup.transition(t).call(xAxis);
+            xAxisScatterGroup.transition(t).call(xAxis);
 
             const yAxis = d3.axisLeft(y)
                 .tickFormat((d) => `#${d}`);    
-            yAxisGroup.transition(t).call(yAxis);
+            yAxisScatterGroup.transition(t).call(yAxis);
 
             const circles = group.selectAll('circle')
                 .data(data);
@@ -204,7 +204,6 @@ export default () => {
                 .append('circle')
                 .attr('class', 'enter')
                 .attr('fill', (d) => {
-                    console.log(continentColor(d.death))
                     return '#F5A9A9';
                 })
                 .transition(t)
@@ -228,7 +227,7 @@ export default () => {
     return (
         <>
             <div className='chart-container'>
-                <span> COVID-19 Death Count By Country</span>
+                <span> COVID-19 Death Count By Country(Top 20)</span>
                 <div id='chartarea'></div>
             </div>
             <div className='chart-container'>
