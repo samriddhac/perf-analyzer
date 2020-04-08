@@ -11,6 +11,7 @@
     "chart.js": "^2.9.3",
     "classnames": "^2.2.6",
     "d3": "^5.15.1",
+    "d3-tip": "^0.9.1",
     "google-maps-react": "^2.0.2",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",

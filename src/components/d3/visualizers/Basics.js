@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import _ from 'lodash';
 import * as d3 from 'd3';
+import d3Tip from "d3-tip"
 
 export default () => {
     const t = d3.transition().duration(750);
@@ -11,6 +12,13 @@ export default () => {
         const legendWidth = 200;
         const width = 640 - margin.left  - margin.right;
         const height = 720 - margin.top  - margin.bottom;
+
+        const tip = d3Tip().attr('class', 'tool-tip')
+            .html((d) => {
+                let text = '<div class="tip"><span>Death Count:</span><span>';
+                text+=d.totalDeath+'</span></div>';
+                return text;
+            });
 
         const group = d3.select('#chartarea')
             .append('svg')
@@ -55,6 +63,9 @@ export default () => {
         // Y Scale
         const y = d3.scaleLinear()
             .range([0, width]);
+
+        const dataGroup = group.append('g');
+        dataGroup.call(tip);
 
         d3.csv('/data/total-deaths-covid-19.csv').then(data => {
             data.forEach(item => item.Deaths = parseInt(item.Deaths));
@@ -112,8 +123,6 @@ export default () => {
                 .tickFormat((d) => `#${d}`);    
             yAxisGroup.call(yAxis);
 
-            const dataGroup = group.append('g');
-
             const rects = dataGroup.selectAll('rect')
                 .data(data);
 
@@ -145,6 +154,8 @@ export default () => {
                     return x.bandwidth()||20;
                 })
                 .attr('width', 0)
+                .on("mouseover", tip.show)
+                .on("mouseout", tip.hide)
                 .transition(t)
                     .attr('width', d => {
                         return y(d.totalDeath);

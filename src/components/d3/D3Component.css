@@ -14,3 +14,18 @@
 .chart-container span {
     background: #44c0c9;
 }
+
+.tool-tip {
+    display: flex;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    background-color: #151b26;
+    padding: 10px;
+}
+.tool-tip .tip {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: #ffffff;
+}
