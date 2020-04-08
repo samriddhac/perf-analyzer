@@ -6,16 +6,22 @@ export default () => {
     const t = d3.transition().duration(750);
 
     const generateCovidDeathChart = () => {
+        const continentColor = d3.scaleOrdinal(d3.schemeCategory10);
+        const margin = {top:60, right:20, bottom:100, left:150};
+        const legendWidth = 200;
+        const width = 640 - margin.left  - margin.right;
+        const height = 720 - margin.top  - margin.bottom;
+
         const group = d3.select('#chartarea')
             .append('svg')
-                .attr('width', width + margin.left + margin.top)
+                .attr('width', width + margin.left + margin.top + legendWidth)
                 .attr('height', height + margin.top + margin.bottom)
             .append('g')
                 .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
         //x label
         group.append('text')
-            .attr('y', height + 50)
+            .attr('y', height + (margin.bottom/2))
             .attr('x', width/2)
             .attr('font-size', '0.8rem')
             .attr('color', 'blue')
@@ -23,8 +29,9 @@ export default () => {
             .text('COVID-19 Death Count');
         
         //y label
+        //Rotation changing the direction of axis
         group.append('text')
-            .attr("y", -60)
+            .attr("y", -(margin.left/2))
             .attr("x", -(height / 2))
             .attr('font-size', '0.8rem')
             .attr('color', 'blue')
@@ -68,11 +75,30 @@ export default () => {
                 && countryObj.country !== 'Africa')
                 .sort(function(a, b){return b.totalDeath - a.totalDeath})
                 .slice(0, 20);
+            
+            const legendGroup = group.append('g')
+                .attr('transform', `translate(${width + 10}, ${height-400})`);
 
-                d3.interval(() => {
-                    update(normalizedData);
-                }, 1000);
+            normalizedData.forEach((obj, index) => {
+                const legends = legendGroup.append('g')
+                    .attr('transform', `translate(0, ${index*20})`);
+                
+                legends.append('rect')
+                    .attr('width', 10)
+                    .attr('height', 10)
+                    .attr('fill', continentColor(obj.country));
+                legends.append('text')
+                    .attr('x', 15)
+                    .attr('y', 10)
+                    .attr('font-size', '0.6rem')
+                    .attr('font-weight', '400')
+                    .text(obj.country);
+            });
+
+            d3.interval(() => {
                 update(normalizedData);
+            }, 1000);
+            update(normalizedData);
         });
 
         const update = (data) => {
@@ -80,13 +106,15 @@ export default () => {
             y.domain([0, d3.max(data, (d) => d.totalDeath)]);
 
             const xAxis = d3.axisLeft(x);
-            xAxisGroup.transition(t).call(xAxis);
+            xAxisGroup.call(xAxis);
 
             const yAxis = d3.axisBottom(y)
                 .tickFormat((d) => `#${d}`);    
-            yAxisGroup.transition(t).call(yAxis);
+            yAxisGroup.call(yAxis);
 
-            const rects = group.selectAll('rect')
+            const dataGroup = group.append('g');
+
+            const rects = dataGroup.selectAll('rect')
                 .data(data);
 
             //Remove old data.
@@ -121,11 +149,15 @@ export default () => {
                     .attr('width', d => {
                         return y(d.totalDeath);
                     })
-                    .attr('fill', '#F5A9A9');
+                    .attr('fill', (d) => {
+                        return continentColor(d.country);
+                    });
         }
     }
 
     const generateItalyDeathRate = () => {
+        const width = 640 - margin.left  - margin.right;
+        const height = 480 - margin.top  - margin.bottom;
         const continentColor = d3.scaleBand(d3.schemePastel1);
         const group = d3.select('#scatter-chartarea')
             .append('svg')
@@ -187,11 +219,11 @@ export default () => {
             y.domain([d3.max(data, (d) => d.death), 0]);
 
             const xAxis = d3.axisBottom(x);
-            xAxisScatterGroup.transition(t).call(xAxis);
+            xAxisScatterGroup.call(xAxis);
 
             const yAxis = d3.axisLeft(y)
                 .tickFormat((d) => `#${d}`);    
-            yAxisScatterGroup.transition(t).call(yAxis);
+            yAxisScatterGroup.call(yAxis);
 
             const circles = group.selectAll('circle')
                 .data(data);
@@ -216,8 +248,6 @@ export default () => {
                     .attr('r', 3);
         }
     }
-
-
 
     useEffect(() => {
         generateCovidDeathChart();
@@ -244,6 +274,3 @@ const margin = {
     bottom: 100,
     left: 80
 };
-
-const width = 640 - margin.left  - margin.right;
-const height = 720 - margin.top  - margin.bottom;
