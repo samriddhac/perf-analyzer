@@ -14,9 +14,10 @@
     align-items: center;
     justify-content: center;
     margin: 10px 20px;
-    font-family: "grad", serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
+    text-transform: uppercase;
 }
 
 .graph-container {
@@ -32,9 +33,10 @@
     align-items: center;
     justify-content: center;
     margin: 0px 20px;
-    font-family: "grad", serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.2rem;
     font-weight: 600;
+    text-transform: uppercase;
     color: #000000;
 }
 .graph-container .chartjs-size-monitor {

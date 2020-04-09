@@ -116,4 +116,5 @@ html, body {
   font-size: 1.8rem;
   font-weight: 600;
   font-style: italic;
+  text-transform: uppercase;
 }

@@ -5,7 +5,7 @@ import Header from '../common/header/Header';
 import withPerformance from '../../performance/PerfHOC';
 import * as resources from '../../resources/resources';
 
-import Basics from './visualizers/Basics';
+import Basics from './visualizers/basics/Basics';
 
 const D3Component = (props) => {
 
