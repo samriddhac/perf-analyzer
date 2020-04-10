@@ -137,7 +137,7 @@ export default () => {
 
             //To update old element present in new data.
             rects.attr('x', (d) => {
-                    return 0;
+                    return 1;
                 })
                 .attr('y', (d) => {
                     return x(d.country)-10;
@@ -146,7 +146,7 @@ export default () => {
                     return x.bandwidth()||20;
                 })
                 .attr('width', d => {
-                    return y(d.total);
+                    return y(d.total)+1;
                 })
                 .attr('fill', (d) => {
                     return colorScheme[d.country];
@@ -155,7 +155,7 @@ export default () => {
             //Enter new elements of new data.
             rects.enter()
                 .append('rect')
-                .attr('x', 0)
+                .attr('x', 1)
                 .attr('y', (d) => {
                     return x(d.country)-10;
                 })
@@ -167,7 +167,7 @@ export default () => {
                 .on("mouseout", tip.hide)
                 .transition(t)
                     .attr('width', d => {
-                        return y(d.total);
+                        return y(d.total)+1;
                     })
                     .attr('fill', (d) => {
                         return colorScheme[d.country];
