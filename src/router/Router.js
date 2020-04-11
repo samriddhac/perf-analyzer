@@ -7,6 +7,7 @@ import {
 
 import AboutView from '../views/AboutView';
 import D3ExperimentsView from '../views/D3ExperimentsView';
+import PhysicsMiscView from '../views/PhysicsMiscView';
 import PerformanceView from '../views/PerformanceView';
 
 export default () => {
@@ -19,6 +20,9 @@ export default () => {
                 </Route>
                 <Route path='/3d' exact>
 
+                </Route>
+                <Route path='/physics-misc' exact>
+                    <PhysicsMiscView />
                 </Route>
                 <Route path='/d3-experiment-1' exact>
                     <D3ExperimentsView />

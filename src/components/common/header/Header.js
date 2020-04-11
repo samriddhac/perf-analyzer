@@ -73,19 +73,19 @@ const menuItems = [
         link: "/3d",
         subItems: [
             {
-                id: "02bf5bda-3bf8-4b42-b2d9-10fef9e87b5d",
-                title: "Chess Experiments",
-                link: "/3d/chess"
-            },
-            {
                 id: "4050e152-e972-46da-94b8-542c09b08efb",
-                title: "Physics Experiments",
-                link: "/3d/physics"
+                title: "Physics Miscellaneous",
+                link: "/physics-misc"
             },
             {
                 id: "ce9a5065-6233-45cb-b8e6-80e8159ba2e6",
                 title: "Solar System Experiments",
                 link: "/3d/solarsys"
+            },
+            {
+                id: "02bf5bda-3bf8-4b42-b2d9-10fef9e87b5d",
+                title: "Chess Experiments",
+                link: "/3d/chess"
             }
         ]
     }

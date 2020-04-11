@@ -1,13 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import _ from 'lodash';
 import * as d3 from 'd3';
 import d3Tip from "d3-tip";
+import PlayCircleOutlineOutlinedIcon from '@material-ui/icons/PlayCircleOutlineOutlined';
+import PauseCircleOutlineOutlinedIcon from '@material-ui/icons/PauseCircleOutlineOutlined';
+import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
+import FastForwardOutlinedIcon from '@material-ui/icons/FastForwardOutlined';
+import FastRewindOutlinedIcon from '@material-ui/icons/FastRewindOutlined';
 
 export default () => {
     const t = d3.transition().duration(750);
 
+    const [ play, setPlay ] = useState(false);
+    const [ data, setData ] = useState({});
+    const [ colorScheme, setColorScheme ] = useState({});
+    const [ maxDeath, setMaxDeath ] = useState({});
+
+    let timeIndex = useRef(1);
+    let interval = useRef();
+    let periodicUpdate = useRef();
+
     const generateCovidDeathChart = () => {
-        const margin = {top:60, right:20, bottom:100, left:150};
+        const margin = {top:40, right:20, bottom:80, left:150};
         const legendWidth = 200;
         const width = 640 - margin.left  - margin.right;
         const height = 720 - margin.top  - margin.bottom;
@@ -69,11 +83,14 @@ export default () => {
         const dateGroup = group.append('g')
             .attr('transform', `translate(${width + 10}, ${0})`);
 
-        let timeIndex = 1;
         d3.csv('/data/total-deaths-covid-19.csv').then(data => {
             const {dataByDate,top20Country, maxDeath} = formatData(data);
             const continentColor = d3.scaleOrdinal(d3.schemePastel1);
             const colorScheme = colorSchemes(top20Country);
+
+            setData(dataByDate);
+            setColorScheme(colorScheme);
+            setMaxDeath(maxDeath);
 
             const legendGroup = group.append('g')
                 .attr('transform', `translate(${width + 10}, ${height-(top20Country.length * 20)})`);
@@ -95,16 +112,21 @@ export default () => {
             });
             
             const dates = Object.keys(dataByDate);
-            d3.interval(() => {
-                if(timeIndex < dates.length) {
-                    let chartData = dataByDate[dates[timeIndex]];
-                    chartData = _.reverse(_.sortBy(chartData, function(o) { return o.total; }));
-                    update(chartData, dates[timeIndex], maxDeath, colorScheme);
-                    timeIndex++;
-                }
-            }, 1000);
+            periodicUpdate.current(dataByDate, dates, maxDeath, colorScheme);
+
             update(dataByDate[dates[0]], dates[0], maxDeath, colorScheme);
         });
+
+        periodicUpdate.current = (dataByDate, dates, maxDeath, colorScheme) => {
+            interval.current = setInterval(() => {
+                if(timeIndex.current < dates.length) {
+                    let chartData = dataByDate[dates[timeIndex.current]];
+                    chartData = _.reverse(_.sortBy(chartData, function(o) { return o.total; }));
+                    update(chartData, dates[timeIndex.current], maxDeath, colorScheme);
+                    timeIndex.current += 1;
+                }
+            }, 1000);
+        }
 
         const update = (data, date, maxDeath, colorScheme) => {
             x.domain(data.map(o => o.country));
@@ -270,9 +292,52 @@ export default () => {
         generateCovidDeathChart();
     }, []);
 
+    const onPlay = () => {
+        setPlay(false);
+        const dates = Object.keys(data);
+        periodicUpdate.current(data, dates, maxDeath, colorScheme);
+    }
+
+    const onPause = () => {
+        setPlay(true);
+        clearInterval(interval.current);
+    }
+
+    const onStop = () => {
+        timeIndex.current = 0;
+    }
+
+    const onForward = () => {
+        console.log(timeIndex.current);
+        const total = Object.keys(data).length;
+        if(timeIndex.current+10<(total-1)) {
+            timeIndex.current = timeIndex.current+10;
+        }
+        else {
+            timeIndex.current = total-1;
+        }
+    }
+
+    const onBackWard = () => {
+        const total = Object.keys(data).length;
+        if(timeIndex.current-10 > 0) {
+            timeIndex.current = timeIndex.current-10;
+        }
+        else {
+            timeIndex.current = 0;
+        }
+    }
+
     return (
         <div className='chart-container'>
             <span> COVID-19 Death Count By Country(Top 20)</span>
+            <div className='btn-bar'>
+                <FastRewindOutlinedIcon className='icon' onClick={onBackWard}/>
+                {play && <PlayCircleOutlineOutlinedIcon className='icon' onClick={onPlay} />}
+                {!play && <PauseCircleOutlineOutlinedIcon className='icon' onClick={onPause} />}
+                <CancelOutlinedIcon className='icon' onClick={onStop} />
+                <FastForwardOutlinedIcon className='icon' onClick={onForward}/>
+            </div>
             <div id='chartarea'></div>
         </div>
     );
