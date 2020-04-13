@@ -114,7 +114,8 @@
 }
 
 .land:hover {
-  stroke: black;
+  stroke: #fff;
+  stroke-width: 1px;
 }
 
 .boundary {

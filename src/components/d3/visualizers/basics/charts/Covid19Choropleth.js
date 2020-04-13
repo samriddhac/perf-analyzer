@@ -6,8 +6,9 @@ import * as d3colorscheme from 'd3-scale-chromatic';
 
 export default () => {
 
-    const width = 720;
+    const width = 640;
     const height = 480;
+    const legendWidth = 200;
     const t = d3.transition().duration(750);
     const projection = d3.geoEqualEarth()
         .scale(140)
@@ -20,8 +21,11 @@ export default () => {
     useEffect(() => {
         const svg = d3.select('#choropleth-world-covid')
             .append('svg')
-            .attr('width', width)
+            .attr('width', width+legendWidth)
             .attr('height', height);
+
+        const colorMapGroup = svg.append('g')
+            .attr('transform', `translate(${(width - 10)}, 0)`)
         
         const promises = [
             d3.json('data/countries-110m.json'),
@@ -30,7 +34,33 @@ export default () => {
 
         Promise.all(promises).then((data) => {
             const world = data[0];
-            const {chartDeathMap, chartColorMap} = formatData(data[1]);
+            const {chartDeathMap, chartColorMap, chartRange} = formatData(data[1]);
+            const sortedChartRange = _.sortBy(chartRange, (o) => {
+                return o.min;
+            });
+
+            sortedChartRange.forEach((range, i) => {
+                colorMapGroup.append('rect')
+                    .attr('x', 0)
+                    .attr('y', i*20)
+                    .attr('width', 20)
+                    .attr('height', 10)
+                    .attr('fill', range.color);
+
+                colorMapGroup.append('text')
+                    .attr('x', 30)
+                    .attr('y', (i*20)+8)
+                    .attr('font-size', '0.6rem')
+                    .attr('font-weight', '400')
+                    .style('fill', '#000000')
+                    .text(d => {
+                        if(range.min === range.max) {
+                            return range.min;
+                        }
+                        return `${range.min} - ${range.max}`;
+                    });
+            });
+
             svg.append('g')
                 .attr('class', 'land')
                 .selectAll('path')
@@ -104,7 +134,7 @@ export default () => {
                 chartColorMap.set(country, '#fca6a4');
             }
         }
-        return {chartDeathMap, chartColorMap};
+        return {chartDeathMap, chartColorMap, chartRange};
     }
 
     const getChartRange = (maxDeath) => {

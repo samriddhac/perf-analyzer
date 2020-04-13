@@ -19,6 +19,7 @@ export default () => {
     let timeIndex = useRef(1);
     let interval = useRef();
     let periodicUpdate = useRef();
+    let update = useRef();
 
     const generateCovidDeathChart = () => {
         const margin = {top:40, right:20, bottom:80, left:150};
@@ -114,7 +115,7 @@ export default () => {
             const dates = Object.keys(dataByDate);
             periodicUpdate.current(dataByDate, dates, maxDeath, colorScheme);
 
-            update(dataByDate[dates[0]], dates[0], maxDeath, colorScheme);
+            update.current(dataByDate[dates[0]], dates[0], maxDeath, colorScheme);
         });
 
         periodicUpdate.current = (dataByDate, dates, maxDeath, colorScheme) => {
@@ -122,13 +123,13 @@ export default () => {
                 if(timeIndex.current < dates.length) {
                     let chartData = dataByDate[dates[timeIndex.current]];
                     chartData = _.reverse(_.sortBy(chartData, function(o) { return o.total; }));
-                    update(chartData, dates[timeIndex.current], maxDeath, colorScheme);
+                    update.current(chartData, dates[timeIndex.current], maxDeath, colorScheme);
                     timeIndex.current += 1;
                 }
             }, 1000);
         }
 
-        const update = (data, date, maxDeath, colorScheme) => {
+        update.current = (data, date, maxDeath, colorScheme) => {
             x.domain(data.map(o => o.country));
             y.domain([0, maxDeath]);
             const xAxis = d3.axisLeft(x);
@@ -308,7 +309,6 @@ export default () => {
     }
 
     const onForward = () => {
-        console.log(timeIndex.current);
         const total = Object.keys(data).length;
         if(timeIndex.current+10<(total-1)) {
             timeIndex.current = timeIndex.current+10;
@@ -316,16 +316,23 @@ export default () => {
         else {
             timeIndex.current = total-1;
         }
+        const dates = Object.keys(data);
+        let chartData = data[dates[timeIndex.current]];
+        chartData = _.reverse(_.sortBy(chartData, function(o) { return o.total; }));
+        update.current(chartData, dates[timeIndex.current], maxDeath, colorScheme);
     }
 
     const onBackWard = () => {
-        const total = Object.keys(data).length;
         if(timeIndex.current-10 > 0) {
             timeIndex.current = timeIndex.current-10;
         }
         else {
             timeIndex.current = 0;
         }
+        const dates = Object.keys(data);
+        let chartData = data[dates[timeIndex.current]];
+        chartData = _.reverse(_.sortBy(chartData, function(o) { return o.total; }));
+        update.current(chartData, dates[timeIndex.current], maxDeath, colorScheme);
     }
 
     return (
