@@ -6,6 +6,7 @@ import withPerformance from '../../performance/PerfHOC';
 import * as resources from '../../resources/resources';
 
 import Basics from './visualizers/basics/Basics';
+import Misc from './visualizers/misc/Misc';
 
 const D3Component = (props) => {
 
@@ -13,9 +14,8 @@ const D3Component = (props) => {
         switch(props.location.pathname) {
             case '/d3-experiment-1':
                 return (<Basics />);
-            break;
             case '/d3-experiment-2':
-
+                return (<Misc />);
             break;
             case '/d3-experiment-3':
 

@@ -57,7 +57,7 @@ const menuItems = [
             },
             {
                 id: "8e98d8c8-7639-444b-949a-a753649a0a8b",
-                title: "D3 Experiments 2",
+                title: "D3 Miscellenius",
                 link: "/d3-experiment-2"
             },
             {
