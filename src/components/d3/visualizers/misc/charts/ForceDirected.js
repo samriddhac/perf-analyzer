@@ -5,7 +5,7 @@ import './ForceDirected.css';
 
 export default () => {
     const width = 640;
-    const height = 640;
+    const height = 520;
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
     const simulation = d3.forceSimulation()
