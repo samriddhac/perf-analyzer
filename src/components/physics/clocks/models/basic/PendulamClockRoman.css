@@ -200,11 +200,27 @@
     position: absolute;
     content: '\02C4';
     font-family: 'Roman SD';
-    left: -0.23vw;
-    top: -0.78vw;
 }
-.basic-pendulam-roman .hand.ss::after {
-    left: -0.3vw;
+
+/* Smartphones (portrait and landscape) ---------- */
+@media screen and (min-width: 320px) and (max-width: 1224px){
+    .basic-pendulam-roman .hand::after {
+        left: -0.3vw;
+        top: -0.8vw;
+    }
+    .basic-pendulam-roman .hand.ss::after {
+        left: -0.4vw;
+    }
+  }
+  /* Desktops and laptops ---------- */
+  @media screen and (min-width: 1224px) {
+    .basic-pendulam-roman .hand::after {
+        left: -0.23vw;
+        top: -0.78vw;
+    }
+    .basic-pendulam-roman .hand.ss::after {
+        left: -0.3vw;
+    }
 }
 .basic-pendulam-roman .hand.ss {
     width: 1px;
