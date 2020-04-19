@@ -16,3 +16,8 @@ code {
   font-family: 'Digital';
   src: local('Digital'), url(./fonts/digital-7.ttf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Roman SD';
+  src: local('Roman SD'), url(./fonts/roman_sd/Roman\ SD.ttf) format('truetype');
+}

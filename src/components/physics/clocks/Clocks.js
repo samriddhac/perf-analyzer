@@ -6,6 +6,7 @@ import BasicClockBlue from './models/basic/BasicClockBlue';
 import BasicClockRed from './models/basic/BasicClockRed';
 import DigitalClock from './models/digital/DigitalClock';
 import PendulamClock from './models/basic/PendulamClock';
+import PendulamClockRoman from './models/basic/PendulamClockRoman';
 
 import './Clocks.css';
 
@@ -22,6 +23,7 @@ export default (props) => {
                         <BasicClockRed />
                         <DigitalClock />
                         <PendulamClock />
+                        <PendulamClockRoman />
                     </div>
                 </div>
             </div>
