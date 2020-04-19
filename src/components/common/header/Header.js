@@ -84,8 +84,8 @@ const menuItems = [
             },
             {
                 id: "02bf5bda-3bf8-4b42-b2d9-10fef9e87b5d",
-                title: "Chess Experiments",
-                link: "/3d/chess"
+                title: "Clocks",
+                link: "/clocks"
             }
         ]
     }
